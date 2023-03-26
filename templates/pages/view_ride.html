@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Ride
+{% endblock %}
+
+{% block imports %}
+    <link href="/static/pages/style.css" rel="stylesheet">
+    <script defer src="/static/pages/view-ride/script.js"></script>
+{% endblock %}
+
+{% block heading %}
+    {{ ride["title"] }}
+{% endblock %}
+
+
+{% block body %}
+    <script>
+        <!-- Passing Jinja variable to javascript -->
+        const ridePt = {{ ride["pts"]|tojson }};  // https://jinja.palletsprojects.com/en/3.1.x/templates/#jinja-filters.tojson
+    </script>
+
+    <p class="fs-5">{{ ride["start_time"]|epochs2dt }}</p>
+
+    <table class="table table-bordered text-center align-middle fs-4">
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <p>Average Speed</p>
+                        <p id="avgSpeedP" class="dVal my-0">{{ ride["avg_speed"] }}</p><span class="unit mt-0 fw-light">Km/h</span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <p>Max Speed</p>
+                        <p id="maxSpeedP" class="dVal my-0">{{ ride["max_speed"] }}</p><span class="unit mt-0 fw-light">Km/h</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <p>Distance</p>
+                        <p id="totalDistanceP" class="dVal my-0">{{ ride["distance"] }}</p><span class="unit mt-0 fw-light">Km</span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <p class="fs-5 mb-0 mt-2">Total Time</p>
+                        <p class="fs-1 my-0">{{ ride["total_time"]|format_time }}</p>
+                        <p class="fs-5 mb-0 mt-2">Moving Time</p>
+                        <p class="fs-1 my-0">{{ ride["moving_time"]|format_time }}</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="viewRideMap" class="mb-3 map"></div>
+
+    <div>
+        <h3>Notes:</h3>
+        <p>{{ ride["notes"] }}</p>
+    </div>
+
+    <a href="/history" class="btn btn-secondary btn-lg my-3">Back</a>
+{% endblock %}

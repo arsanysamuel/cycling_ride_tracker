@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block imports %}
+    <script defer src="/static/auth/register/script.js"></script>
+{% endblock %}
+
+{% block heading %}
+    Register
+{% endblock %}
+
+{% block body %}
+    <form action="/register" method="POST">
+        <div class="mb-4">
+            <input required id="regUsername" class="form-control mx-auto w-auto" type="text" name="username" placeholder="Username...">
+        </div>
+        <div class="mb-4">
+            <input required id="regPass" class="form-control mx-auto w-auto" type="password" name="password" placeholder="Password...">
+        </div>
+        <div class="mb-4">
+            <input required id="regRePass" class="form-control mx-auto w-auto" type="password" name="repassword" placeholder="Retype Password...">
+        </div>
+        <div class="mb-4">
+            <input id="registerBtn" class="btn btn-secondary btn-lg" type="submit" value="Register">
+        </div>
+    </form>
+    <p>Already a user? <a href="/login">Login</a></p>
+{% endblock %}

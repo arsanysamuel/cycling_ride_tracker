@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Rides History
+{% endblock %}
+
+{% block imports %}
+    <link href="/static/pages/style.css" rel="stylesheet">
+{% endblock %}
+
+{% block heading %}
+    Rides History
+{% endblock %}
+
+{% block body %}
+    {% if rides|length > 0 %}
+        <p class="fs-4">Total rides: {{ rides|length }}</p>
+        <div id="rideHistoryDiv">
+            <div class="list-group">
+                {% for ride in rides %}
+                    <a href="/view-ride?id={{ ride[0] }}" class="list-group-item d-flex justify-content-between">
+                        <div class="mx-auto">
+                            <div class="fw-bold fs-4">{{ ride[1] }}</div>
+                            {{ ride[2]|epochs2dt }}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p class="fs-4">You didn't go for any rides yet, start a <a href="/ride">new ride</a>?</p>
+    {% endif %}
+{% endblock %}
