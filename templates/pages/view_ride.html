@@ -60,8 +60,10 @@
     <div id="viewRideMap" class="mb-3 map"></div>
 
     <div>
-        <h3>Notes:</h3>
-        <p>{{ ride["notes"] }}</p>
+        {% if ride["notes"] or ride["notes"]|length > 0 %}
+            <h3>Notes:</h3>
+            <p>{{ ride["notes"] }}</p>
+        {% endif %}
     </div>
 
     <a href="/history" class="btn btn-secondary btn-lg my-3">Back</a>
