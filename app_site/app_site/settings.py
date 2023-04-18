@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # User applications
+    'ride_tracker.apps.RideTrackerConfig'
 ]
 
 MIDDLEWARE = [
@@ -105,11 +108,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Cairo'  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False  # https://stackoverflow.com/questions/49425029/django-models-datetimefield-is-taking-utc-even-when-timezone-is-asia-calcutta-e
 
 
 # Static files (CSS, JavaScript, Images)
@@ -121,3 +124,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# User added
+LOGIN_URL = 'login/'

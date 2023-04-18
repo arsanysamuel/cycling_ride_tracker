@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import UserRides, Ride, Point
+
+admin.site.register(UserRides)
+admin.site.register(Ride)
+admin.site.register(Point)

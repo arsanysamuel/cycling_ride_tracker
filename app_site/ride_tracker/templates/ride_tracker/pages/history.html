@@ -1,0 +1,36 @@
+{% extends "ride_tracker/layout.html" %}
+
+{% block title %}
+    Rides History
+{% endblock %}
+
+{% block imports %}
+    {% load static %}
+    <link href="{% static 'ride_tracker/pages/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block heading %}
+    Rides History
+{% endblock %}
+
+{% block body %}
+    {% load custom_filters %}
+    {% if rides|length > 0 %}
+        {#<p class="fs-4">Total rides: {{ rides|length }}</p>#}
+        <p class="fs-4">Total rides: {{ request.user.userrides.ride_count }}</p>
+        <div id="rideHistoryDiv">
+            <div class="list-group">
+                {% for ride in rides %}
+                    <a href="{% url 'ride_tracker:view-ride' ride.pk %}" class="list-group-item d-flex justify-content-between">
+                        <div class="mx-auto">
+                            <div class="fw-bold fs-4">{{ ride.title }}</div>
+                            {{ ride.start_time|datetime_formatted }}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p class="fs-4">You didn't go for any rides yet, start a <a href="/ride">new ride</a>?</p>
+    {% endif %}
+{% endblock %}

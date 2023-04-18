@@ -1,0 +1,72 @@
+{% extends "ride_tracker/layout.html" %}
+
+{% block title %}
+    View Ride
+{% endblock %}
+
+{% block imports %}
+    {% load static %}
+    <link href="{% static 'ride_tracker/pages/style.css' %}" rel="stylesheet">
+    <script defer src="{% static 'ride_tracker/pages/view-ride/script.js' %}"></script>
+{% endblock %}
+
+{% block heading %}
+    {{ ride.title }}
+{% endblock %}
+
+
+{% block body %}
+    {% load custom_filters %}
+    <script>
+        // Passing Jinja variable to javascript
+        const ridePoints = {{ points|safe }};  // https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#safe
+    </script>
+
+    <p class="fs-5">{{ ride.start_time|datetime_formatted }}</p>
+
+    <table class="table table-bordered text-center align-middle fs-4">
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <p>Average Speed</p>
+                        <p id="avgSpeedP" class="dVal my-0">{{ ride.avg_speed }}</p><span class="unit mt-0 fw-light">Km/h</span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <p>Max Speed</p>
+                        <p id="maxSpeedP" class="dVal my-0">{{ ride.max_speed }}</p><span class="unit mt-0 fw-light">Km/h</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <p>Distance</p>
+                        <p id="totalDistanceP" class="dVal my-0">{{ ride.distance }}</p><span class="unit mt-0 fw-light">Km</span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <p class="fs-5 mb-0 mt-2">Total Time</p>
+                        <p class="fs-1 my-0">{{ ride.total_time|format_time }}</p>
+                        <p class="fs-5 mb-0 mt-2">Moving Time</p>
+                        <p class="fs-1 my-0">{{ ride.moving_time|format_time }}</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="viewRideMap" class="mb-3 map"></div>
+
+    <div>
+        {% if ride.notes or ride.notes|length > 0 %}
+            <h3>Notes:</h3>
+            <p>{{ ride.notes }}</p>
+        {% endif %}
+    </div>
+
+    <a href="/history" class="btn btn-secondary btn-lg my-3">Back</a>
+{% endblock %}

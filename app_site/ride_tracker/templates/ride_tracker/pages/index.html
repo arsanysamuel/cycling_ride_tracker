@@ -1,0 +1,21 @@
+{% extends "ride_tracker/layout.html" %}
+
+{% block title %}
+    Start page
+{% endblock %}
+
+{% block imports %}
+    {% load static %}
+    <link href="{% static 'ride_tracker/pages/style.css' %}" rel="stylesheet">
+    <script defer src="{% static 'ride_tracker/pages/index/script.js' %}"></script>
+{% endblock %}
+
+{% block heading %}
+    Start a Ride
+{% endblock %}
+
+{% block body %}
+    <div id="indexMap" class="mb-3 map"></div>
+    <a id="startRideBtn" class="btn btn-secondary btn-lg my-3" href="/ride">Start a ride</a>
+    <p class="fw-lighter">Please use with a GPS equipped device (eg. smart phone) and make sure the location service is enabled.</p>
+{% endblock %}
